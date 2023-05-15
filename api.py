@@ -2,7 +2,7 @@ import shutil
 from typing import List
 from fastapi import APIRouter, UploadFile, File
 
-# from schemas import UploadVideo
+from schemas import UploadVideo
 
 video_router = APIRouter()
 
@@ -22,3 +22,8 @@ async def upload_image(file: List[UploadFile] = File(...)):
             shutil.copyfileobj(img.file, buffer)
 
     return {"file_name": "GOOD"}
+
+
+@video_router.post("/info")
+async def info_set(info: UploadVideo):
+    return info
